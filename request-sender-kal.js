@@ -2,150 +2,201 @@ const axios = require('axios');
 
 // Applicant Data
 const applicantsList = [
-
-     {
-    firstName: "EDALE",
-    middleName: "EMSHAW",
-    lastName: "KIBIRET",
-    geezFirstName: "እንዳለ",
-    geezMiddleName: "እምሻው",
-    geezLastName: "ክብረት",
-    dateOfBirth: "2000-11-28",
-    phoneNumber: "+251972774485",
-    birthPlace: "Amhara",
+  {
+    firstName: "ABDU",
+    middleName: "DUBALE",
+    lastName: "TEBEJE",
+    geezFirstName: "አብዱ",
+    geezMiddleName: "ዱባለ",
+    geezLastName: "ተበጀ",
+    dateOfBirth: "2004-02-09",
+    phoneNumber: "+251919109124", // Random phone number used
+    birthPlace: "DEBUB WOLLO",
     gender: 1
   },
- {
-    firstName: "HAIMANOT",
-    middleName: "BEKELE",
-    lastName: "DEJENIE",
-    geezFirstName: "ሀይማኖት",
-    geezMiddleName: "በቀለ",
-    geezLastName: "ደጀኔ",
-    dateOfBirth: "1998-11-19",
-    phoneNumber: "+251962174943",
-    birthPlace: "Amhara",
-    gender: 0
-  },
-   {
-    firstName: "HABTAM",
-    middleName: "CHANE",
-    lastName: "NIGUS",
-    geezFirstName: "ሀብታም",
-    geezMiddleName: "ጫኔ",
-    geezLastName: "ንጉስ",
-    dateOfBirth: "2002-11-28",
-    phoneNumber: "+251962174943",
-    birthPlace: "Amhara",
+  {
+    firstName: "HENOK",
+    middleName: "TESHALE",
+    lastName: "FENTAW",
+    geezFirstName: "ሄኖክ",
+    geezMiddleName: "ተሻለ",
+    geezLastName: "ፈንታው",
+    dateOfBirth: "2001-02-23",
+    phoneNumber: "+251919109124", // Random phone number used
+    birthPlace: "DEBUB WOLLO",
     gender: 1
   },
-     {
-    firstName: "SINKE",
-    middleName: "YIMER",
-    lastName: "GETNET",
-    geezFirstName: "ስንቄ",
-    geezMiddleName: "ይመር",
-    geezLastName: "ጌትነት",
-    dateOfBirth: "2001-02-07",
-    phoneNumber: "+251962174943",
-    birthPlace: "Amhara",
-    gender: 0
-  },
-    {
-    firstName: "YIRGED",
-    middleName: "MAMO",
-    lastName: "TESHOME",
-    geezFirstName: "ይርገድ",
-    geezMiddleName: "ማሞ",
-    geezLastName: "ተሾመ",
-    dateOfBirth: "1999-11-26",
-    phoneNumber: "+251972709394",
-    birthPlace: "Amhara",
-    gender: 0
-  },
-  
-   {
-    firstName: "EMAN",
-    middleName: "AHMED",
-    lastName: "ENDRIS",
-    geezFirstName: "ኢማን",
-    geezMiddleName: "አህመድ",
-    geezLastName: "እንዲሪስ",
-    dateOfBirth: "2018-05-29",
-    phoneNumber: "+251920786794",
-    birthPlace: "Amhara",
-    gender: 0
-  },
-    {
-    firstName: "SHEGAW",
-    middleName: "GOSHME",
-    lastName: "ABEBE",
-    geezFirstName: "ሸጋው",
-    geezMiddleName: "ጐሽሜ",
-    geezLastName: "አበበ",
-    dateOfBirth: "1994-09-26",
-    phoneNumber: "+251920786794",
-    birthPlace: "Afar",
+  {
+    firstName: "ADUGNA",
+    middleName: "TOLERA",
+    lastName: "RIKITI",
+    geezFirstName: "አዱኛ",
+    geezMiddleName: "ቶሌራ",
+    geezLastName: "ሪቂቲ",
+    dateOfBirth: "1998-07-21",
+    phoneNumber: "0938765564",
+    birthPlace: "WOLLISO",
     gender: 1
   },
-   {
-    firstName: "WENDESEN",
+  {
+    firstName: "HADRA",
+    middleName: "SHIMELASH",
+    lastName: "ALI",
+    geezFirstName: "ሀድራ",
+    geezMiddleName: "ሺመላሽ",
+    geezLastName: "አሊ",
+    dateOfBirth: "2002-01-28",
+    phoneNumber: "+251919109124", // Random phone number used
+    birthPlace: "SEMEN WOLLO",
+    gender: 0
+  },
+  {
+    firstName: "GEREM",
+    middleName: "TADESSE",
+    lastName: "DESSIE",
+    geezFirstName: "ገረም",
+    geezMiddleName: "ታደሰ",
+    geezLastName: "ደሴ",
+    dateOfBirth: "1995-12-28",
+    phoneNumber: "0972888066",
+    birthPlace: "SHEWAROBIT",
+    gender: 1
+  },
+  {
+    firstName: "TEJU",
+    middleName: "ZEWDU",
+    lastName: "MANGUDAY",
+    geezFirstName: "ጠጁ",
+    geezMiddleName: "ዘዉዱ",
+    geezLastName: "ማንጉዳይ",
+    dateOfBirth: "2001-09-02",
+    phoneNumber: "0985337742",
+    birthPlace: "KEWOT",
+    gender: 1
+  },
+  {
+    firstName: "YIRGALEM",
+    middleName: "MORD",
+    lastName: "ASTATKE",
+    geezFirstName: "ይርጋለም",
+    geezMiddleName: "ሞርድ",
+    geezLastName: "አስታጥቄ",
+    dateOfBirth: "2002-05-08",
+    phoneNumber: "0950263677",
+    birthPlace: "AMHARA",
+    gender: 1
+  },
+  {
+    firstName: "BIRTUKAN",
+    middleName: "GETACHEW",
+    lastName: "NIGUSSE",
+    geezFirstName: "ብርቱካን",
+    geezMiddleName: "ጌታቸው",
+    geezLastName: "ንጉሴ",
+    dateOfBirth: "2002-11-20",
+    phoneNumber: "0963817728",
+    birthPlace: "AMHARA",
+    gender: 0
+  },
+  {
+    firstName: "EMIYA",
+    middleName: "GOSHIMIE",
+    lastName: "NEWAY",
+    geezFirstName: "እሚያ",
+    geezMiddleName: "ጎሽሜ",
+    geezLastName: "ንዋይ",
+    dateOfBirth: "1996-10-20",
+    phoneNumber: "+251919109124", // Random phone number used
+    birthPlace: "SHEWAROBIT",
+    gender: 0
+  },
+  {
+    firstName: "EBRAHEM",
     middleName: "ALI",
-    lastName: "KEMAL",
-    geezFirstName: "ወንደሰን",
+    lastName: "MEHAMED",
+    geezFirstName: "ኢብራሂም",
     geezMiddleName: "አሊ",
-    geezLastName: "ከማል",
-    dateOfBirth: "1996-07-05",
-    phoneNumber: "+251920786794",
-    birthPlace: "Amhara",
+    geezLastName: "መሀመድ",
+    dateOfBirth: "1998-10-03",
+    phoneNumber: "0930182500",
+    birthPlace: "SHEWAROBIT",
     gender: 1
   },
-       {
-    firstName: "AMANUEL",
-    middleName: "BEREGENE",
-    lastName: "KASSA",
-    geezFirstName: "አማኑኤል",
-    geezMiddleName: "በርገነ",
-    geezLastName: "ካሳ",
-    dateOfBirth: "1994-09-11",
-    phoneNumber: "+251988333222",
-    birthPlace: "Wolaita",
+  {
+    firstName: "DELELEGN",
+    middleName: "YEMENU",
+    lastName: "BEKELE",
+    geezFirstName: "ደለለኝ",
+    geezMiddleName: "ይመኑ",
+    geezLastName: "በቀለ",
+    dateOfBirth: "2002-02-14",
+    phoneNumber: "0975451032",
+    birthPlace: "TARMABER",
     gender: 1
-  },      {
-    firstName: "AMANUEL",
-    middleName: "BEREGENE",
-    lastName: "KASSA",
-    geezFirstName: "አማኑኤል",
-    geezMiddleName: "በርገነ",
-    geezLastName: "ካሳ",
-    dateOfBirth: "1994-09-11",
-    phoneNumber: "+251988333222",
-    birthPlace: "Wolaita",
+  },
+  {
+    firstName: "WEGAYEHU",
+    middleName: "BENEBERU",
+    lastName: "NIGATU",
+    geezFirstName: "ወጋየሁ",
+    geezMiddleName: "በነበሩ",
+    geezLastName: "ንጋቱ",
+    dateOfBirth: "2000-03-06",
+    phoneNumber: "0945565279",
+    birthPlace: "SHEWAROBIT",
     gender: 1
-  },      {
-    firstName: "AMANUEL",
-    middleName: "BEREGENE",
-    lastName: "KASSA",
-    geezFirstName: "አማኑኤል",
-    geezMiddleName: "በርገነ",
-    geezLastName: "ካሳ",
-    dateOfBirth: "1994-09-11",
-    phoneNumber: "+251988333222",
-    birthPlace: "Wolaita",
+  },
+  {
+    firstName: "AYNALEM",
+    middleName: "HAILU",
+    lastName: "ATLAW",
+    geezFirstName: "አይናለም",
+    geezMiddleName: "ሀይሁ",
+    geezLastName: "አጥላው",
+    dateOfBirth: "1996-10-30",
+    phoneNumber: "+251919109124", // Random phone number used
+    birthPlace: "SHEWAROBIT",
+    gender: 0
+  },
+  {
+    firstName: "MUBAREK",
+    middleName: "ALI",
+    lastName: "SEIDE",
+    geezFirstName: "ሙባረክ",
+    geezMiddleName: "አሊ",
+    geezLastName: "ሰኢድ",
+    dateOfBirth: "2000-08-19",
+    phoneNumber: "0996431474",
+    birthPlace: "SEMENSHEWA",
     gender: 1
-  },      {
-    firstName: "AMANUEL",
-    middleName: "BEREGENE",
-    lastName: "KASSA",
-    geezFirstName: "አማኑኤል",
-    geezMiddleName: "በርገነ",
-    geezLastName: "ካሳ",
-    dateOfBirth: "1994-09-11",
-    phoneNumber: "+251988333222",
-    birthPlace: "Wolaita",
+  },
+  {
+    firstName: "SETOTAWE",
+    middleName: "MENEGESETE",
+    lastName: "BAHIRU",
+    geezFirstName: "ስጦታው",
+    geezMiddleName: "መንግስት",
+    geezLastName: "ባህሩ",
+    dateOfBirth: "2001-09-27",
+    phoneNumber: "0968971605",
+    birthPlace: "SEMINSHEWA",
     gender: 1
-  }, 
+  },
+  {
+    firstName: "TESFAYE",
+    middleName: "ABOYE",
+    lastName: "SHEBESHI",
+    geezFirstName: "ተስፋዬ",
+    geezMiddleName: "አቦዬ",
+    geezLastName: "ሺበሺ",
+    dateOfBirth: "2001-09-21",
+    phoneNumber: "0953237997",
+    birthPlace: "SHEWAROBIT",
+    gender: 1
+  }
 ];
+
+
 const RETRY_DELAY = 2000;
 const RETRY_429_DELAY = 10000;
 const MAX_ID_ATTEMPTS = 10;
@@ -389,9 +440,13 @@ async function sendRequestWithRetry(workerId, applicant) {
         const epNumber = paymentRes.data.orderId;
         const trackerNumber = paymentRes.data.traceNumber;
 
-        console.log(`💰 [PAYMENT - ${fullName}] Success`);
-        console.log(`💰 [EP Number - ${epNumber}] Success`);
-        console.log(`💰 [Tracker Number - ${trackerNumber}] Success`);
+     console.log('\n' + '='.repeat(50));
+  console.log(`🎯 SUCCESS: ${fullName}`);
+  console.log(`🆔 Reserved ID: ${reservedId}`);
+  console.log(`📦 Request ID: ${reqId}`);
+  console.log(`💰 EP Number: ${epNumber}`);
+  console.log(`📨 Tracker Number: ${trackerNumber}`);
+  console.log('='.repeat(50) + '\n');
 
 
         // console.log("📦 Payment Response:", JSON.stringify(paymentRes.data, null, 2));

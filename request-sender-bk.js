@@ -2,372 +2,285 @@ const axios = require('axios');
 
 // Applicant Data
 const applicantsList = [
-    {
-    firstName: "ERMIAS",
-    middleName: "GEDORE",
-    lastName: "GAGABO",
-    geezFirstName: "ኤርምያስ",
-    geezMiddleName: "ገዶሬ",
-    geezLastName: "ገጋቦ",
-    dateOfBirth: "1998-05-`8",
-    phoneNumber: "+251911328671",
-    birthPlace: "Hadiya",
-    gender: 1
-  },
-      {
-    firstName: "ERMIAS",
-    middleName: "GEDORE",
-    lastName: "GAGABO",
-    geezFirstName: "ኤርምያስ",
-    geezMiddleName: "ገዶሬ",
-    geezLastName: "ገጋቦ",
-    dateOfBirth: "1998-05-`8",
-    phoneNumber: "+251911328671",
-    birthPlace: "Hadiya",
-    gender: 1
-  },    {
-    firstName: "ERMIAS",
-    middleName: "GEDORE",
-    lastName: "GAGABO",
-    geezFirstName: "ኤርምያስ",
-    geezMiddleName: "ገዶሬ",
-    geezLastName: "ገጋቦ",
-    dateOfBirth: "1998-05-`8",
-    phoneNumber: "+251911328671",
-    birthPlace: "Hadiya",
-    gender: 1
-  },    {
-    firstName: "ERMIAS",
-    middleName: "GEDORE",
-    lastName: "GAGABO",
-    geezFirstName: "ኤርምያስ",
-    geezMiddleName: "ገዶሬ",
-    geezLastName: "ገጋቦ",
-    dateOfBirth: "1998-05-`8",
-    phoneNumber: "+251911328671",
-    birthPlace: "Hadiya",
-    gender: 1
-  },    {
-    firstName: "ERMIAS",
-    middleName: "GEDORE",
-    lastName: "GAGABO",
-    geezFirstName: "ኤርምያስ",
-    geezMiddleName: "ገዶሬ",
-    geezLastName: "ገጋቦ",
-    dateOfBirth: "1998-05-`8",
-    phoneNumber: "+251911328671",
-    birthPlace: "Hadiya",
-    gender: 1
-  },    {
-    firstName: "ERMIAS",
-    middleName: "GEDORE",
-    lastName: "GAGABO",
-    geezFirstName: "ኤርምያስ",
-    geezMiddleName: "ገዶሬ",
-    geezLastName: "ገጋቦ",
-    dateOfBirth: "1998-05-`8",
-    phoneNumber: "+251911328671",
-    birthPlace: "Hadiya",
-    gender: 1
-  },    {
-    firstName: "ERMIAS",
-    middleName: "GEDORE",
-    lastName: "GAGABO",
-    geezFirstName: "ኤርምያስ",
-    geezMiddleName: "ገዶሬ",
-    geezLastName: "ገጋቦ",
-    dateOfBirth: "1998-05-`8",
-    phoneNumber: "+251911328671",
-    birthPlace: "Hadiya",
-    gender: 1
-  },    {
-    firstName: "ERMIAS",
-    middleName: "GEDORE",
-    lastName: "GAGABO",
-    geezFirstName: "ኤርምያስ",
-    geezMiddleName: "ገዶሬ",
-    geezLastName: "ገጋቦ",
-    dateOfBirth: "1998-05-`8",
-    phoneNumber: "+251911328671",
-    birthPlace: "Hadiya",
-    gender: 1
-  },    {
-    firstName: "ERMIAS",
-    middleName: "GEDORE",
-    lastName: "GAGABO",
-    geezFirstName: "ኤርምያስ",
-    geezMiddleName: "ገዶሬ",
-    geezLastName: "ገጋቦ",
-    dateOfBirth: "1998-05-`8",
-    phoneNumber: "+251911328671",
-    birthPlace: "Hadiya",
-    gender: 1
-  },
-      {
-    firstName: "ERMIAS",
-    middleName: "GEDORE",
-    lastName: "GAGABO",
-    geezFirstName: "ኤርምያስ",
-    geezMiddleName: "ገዶሬ",
-    geezLastName: "ገጋቦ",
-    dateOfBirth: "1998-05-`8",
-    phoneNumber: "+251911328671",
-    birthPlace: "Hadiya",
-    gender: 1
-  },    {
-    firstName: "ERMIAS",
-    middleName: "GEDORE",
-    lastName: "GAGABO",
-    geezFirstName: "ኤርምያስ",
-    geezMiddleName: "ገዶሬ",
-    geezLastName: "ገጋቦ",
-    dateOfBirth: "1998-05-`8",
-    phoneNumber: "+251911328671",
-    birthPlace: "Hadiya",
-    gender: 1
-  },    {
-    firstName: "ERMIAS",
-    middleName: "GEDORE",
-    lastName: "GAGABO",
-    geezFirstName: "ኤርምያስ",
-    geezMiddleName: "ገዶሬ",
-    geezLastName: "ገጋቦ",
-    dateOfBirth: "1998-05-`8",
-    phoneNumber: "+251911328671",
-    birthPlace: "Hadiya",
-    gender: 1
-  },    {
-    firstName: "ERMIAS",
-    middleName: "GEDORE",
-    lastName: "GAGABO",
-    geezFirstName: "ኤርምያስ",
-    geezMiddleName: "ገዶሬ",
-    geezLastName: "ገጋቦ",
-    dateOfBirth: "1998-05-`8",
-    phoneNumber: "+251911328671",
-    birthPlace: "Hadiya",
-    gender: 1
-  },    {
-    firstName: "ERMIAS",
-    middleName: "GEDORE",
-    lastName: "GAGABO",
-    geezFirstName: "ኤርምያስ",
-    geezMiddleName: "ገዶሬ",
-    geezLastName: "ገጋቦ",
-    dateOfBirth: "1998-05-`8",
-    phoneNumber: "+251911328671",
-    birthPlace: "Hadiya",
-    gender: 1
-  },    {
-    firstName: "ERMIAS",
-    middleName: "GEDORE",
-    lastName: "GAGABO",
-    geezFirstName: "ኤርምያስ",
-    geezMiddleName: "ገዶሬ",
-    geezLastName: "ገጋቦ",
-    dateOfBirth: "1998-05-`8",
-    phoneNumber: "+251911328671",
-    birthPlace: "Hadiya",
-    gender: 1
-  },    {
-    firstName: "ERMIAS",
-    middleName: "GEDORE",
-    lastName: "GAGABO",
-    geezFirstName: "ኤርምያስ",
-    geezMiddleName: "ገዶሬ",
-    geezLastName: "ገጋቦ",
-    dateOfBirth: "1998-05-`8",
-    phoneNumber: "+251911328671",
-    birthPlace: "Hadiya",
-    gender: 1
-  },
-    {
-    firstName: "ERMIAS",
-    middleName: "GEDORE",
-    lastName: "GAGABO",
-    geezFirstName: "ኤርምያስ",
-    geezMiddleName: "ገዶሬ",
-    geezLastName: "ገጋቦ",
-    dateOfBirth: "1998-05-`8",
-    phoneNumber: "+251911328671",
-    birthPlace: "Hadiya",
-    gender: 1
-  },
-      {
-    firstName: "ERMIAS",
-    middleName: "GEDORE",
-    lastName: "GAGABO",
-    geezFirstName: "ኤርምያስ",
-    geezMiddleName: "ገዶሬ",
-    geezLastName: "ገጋቦ",
-    dateOfBirth: "1998-05-`8",
-    phoneNumber: "+251911328671",
-    birthPlace: "Hadiya",
-    gender: 1
-  },    {
-    firstName: "ERMIAS",
-    middleName: "GEDORE",
-    lastName: "GAGABO",
-    geezFirstName: "ኤርምያስ",
-    geezMiddleName: "ገዶሬ",
-    geezLastName: "ገጋቦ",
-    dateOfBirth: "1998-05-`8",
-    phoneNumber: "+251911328671",
-    birthPlace: "Hadiya",
-    gender: 1
-  },    {
-    firstName: "ERMIAS",
-    middleName: "GEDORE",
-    lastName: "GAGABO",
-    geezFirstName: "ኤርምያስ",
-    geezMiddleName: "ገዶሬ",
-    geezLastName: "ገጋቦ",
-    dateOfBirth: "1998-05-`8",
-    phoneNumber: "+251911328671",
-    birthPlace: "Hadiya",
-    gender: 1
-  },    {
-    firstName: "ERMIAS",
-    middleName: "GEDORE",
-    lastName: "GAGABO",
-    geezFirstName: "ኤርምያስ",
-    geezMiddleName: "ገዶሬ",
-    geezLastName: "ገጋቦ",
-    dateOfBirth: "1998-05-`8",
-    phoneNumber: "+251911328671",
-    birthPlace: "Hadiya",
-    gender: 1
-  },    {
-    firstName: "ERMIAS",
-    middleName: "GEDORE",
-    lastName: "GAGABO",
-    geezFirstName: "ኤርምያስ",
-    geezMiddleName: "ገዶሬ",
-    geezLastName: "ገጋቦ",
-    dateOfBirth: "1998-05-`8",
-    phoneNumber: "+251911328671",
-    birthPlace: "Hadiya",
-    gender: 1
-  },    {
-    firstName: "ERMIAS",
-    middleName: "GEDORE",
-    lastName: "GAGABO",
-    geezFirstName: "ኤርምያስ",
-    geezMiddleName: "ገዶሬ",
-    geezLastName: "ገጋቦ",
-    dateOfBirth: "1998-05-`8",
-    phoneNumber: "+251911328671",
-    birthPlace: "Hadiya",
-    gender: 1
-  },    {
-    firstName: "ERMIAS",
-    middleName: "GEDORE",
-    lastName: "GAGABO",
-    geezFirstName: "ኤርምያስ",
-    geezMiddleName: "ገዶሬ",
-    geezLastName: "ገጋቦ",
-    dateOfBirth: "1998-05-`8",
-    phoneNumber: "+251911328671",
-    birthPlace: "Hadiya",
-    gender: 1
-  },
-//   {
-//     firstName: "TARIKU",
-//     middleName: "DAGNE",
-//     lastName: "BELETE",
-//     geezFirstName: "ታሪኩ",
-//     geezMiddleName: "ዳኜ",
-//     geezLastName: " በለጠ",
-//     dateOfBirth: "2003-10-07",
-//     phoneNumber: "+251911328671",
-//     birthPlace: "Oromia",
-//     gender: 1
-//   },
-//    {
-//     firstName: "SOLOMON",
-//     middleName: "ASHENE",
-//     lastName: "DEMESSIE",
-//     geezFirstName: "ሰለሞን",
-//     geezMiddleName: "አሽኔ",
-//     geezLastName: " ደምሴ",
-//     dateOfBirth: "1999-10-16",
-//     phoneNumber: "+251911328671",
-//     birthPlace: "Amhara",
-//     gender: 1
-//   },
-//     {
-//     firstName: "SADAM",
-//     middleName: "GETNET",
-//     lastName: "BIRU",
-//     geezFirstName: "ሳዳም",
-//     geezMiddleName: "ጌትነት",
-//     geezLastName: "ብሩ",
-//     dateOfBirth: "2004-04-20",
-//     phoneNumber: "+251911328671",
-//     birthPlace: "Amhara",
-//     gender: 1
-//   },
-//     {
-//     firstName: "MELAT",
-//     middleName: "ACHENEFE",
-//     lastName: "AYALEW",
-//     geezFirstName: "ሜላት ",
-//     geezMiddleName: "አቸነፈ",
-//     geezLastName: "አያሌው",
-//     dateOfBirth: "1996-05-20",
-//     phoneNumber: "+251911328671",
-//     birthPlace: "Amhara",
-//     gender: 0
-//   },
-//  {
-//     firstName: "TEMESGEN",
-//     middleName: "DILE",
-//     lastName: "SHIBIRU",
-//     geezFirstName: "ተመስገን ",
-//     geezMiddleName: "ዲለ",
-//     geezLastName: "ሽብሩ",
-//     dateOfBirth: "1996-09-29",
-//     phoneNumber: "+251911328671",
-//     birthPlace: "Central Ethiopia",
-//     gender: 1
-//   },
-// {
-//     firstName: "SARA",
-//     middleName: "FIKADU",
-//     lastName: "GUTETA",
-//     geezFirstName: "ሳራ",
-//     geezMiddleName: " ፍቃዱ",
-//     geezLastName: "ጉተታ",
-//     dateOfBirth: "2002-06-17",
-//     phoneNumber: "+251911328671",
-//     birthPlace: "Oromia",
-//     gender: 0
-//   },
-// {
-//     firstName: "TAMRAT",
-//     middleName: "MIHRET",
-//     lastName: "DEMISIE",
-//     geezFirstName: "ታምራት",
-//     geezMiddleName: "ምህረት",
-//     geezLastName: "ደምሴ ",
-//     dateOfBirth: "2001-11-26",
-//     phoneNumber: "+251911328671",
-//     birthPlace: "Oromia",
-//     gender: 1
-//   },
-// {
-//     firstName: "MARSHET",
-//     middleName: "SENDEKA",
-//     lastName: "FIREW",
-//     geezFirstName: "ማርሸት",
-//     geezMiddleName: "ሰንደቄ",
-//     geezLastName: "ፍሬው",
-//     dateOfBirth: "2002-09-22",
-//     phoneNumber: "+251911328671",
-//     birthPlace: "Amhara",
-//     gender: 0
-//   },
 
+ {
+    firstName: "TENA",
+    middleName: "TAMERU",
+    lastName: "ABATE",
+    geezFirstName: "ጤና",
+    geezMiddleName: "ታምሩ",
+    geezLastName: "አባተ",
+    dateOfBirth: "1999-11-19",
+    phoneNumber: "+251911328671",
+    birthPlace: "Amhara",
+    gender: 0
+  },   
+{
+    firstName: "TINBIT",
+    middleName: "MERGIYA",
+    lastName: "GUDETA",
+    geezFirstName: "ትንቢት",
+    geezMiddleName: "መርጊያ",
+    geezLastName: "ጉደታ",
+    dateOfBirth: "1977-06-17",
+    phoneNumber: "+251911328671",
+    birthPlace: "Addis Ababa",
+    gender: 0
+  },
+ {
+    firstName: "TENA",
+    middleName: "TAMERU",
+    lastName: "ABATE",
+    geezFirstName: "ጤና",
+    geezMiddleName: "ታምሩ",
+    geezLastName: "አባተ",
+    dateOfBirth: "1999-11-19",
+    phoneNumber: "+251911328671",
+    birthPlace: "Amhara",
+    gender: 0
+  },   
+{
+    firstName: "TINBIT",
+    middleName: "MERGIYA",
+    lastName: "GUDETA",
+    geezFirstName: "ትንቢት",
+    geezMiddleName: "መርጊያ",
+    geezLastName: "ጉደታ",
+    dateOfBirth: "1977-06-17",
+    phoneNumber: "+251911328671",
+    birthPlace: "Addis Ababa",
+    gender: 0
+  }, {
+    firstName: "TENA",
+    middleName: "TAMERU",
+    lastName: "ABATE",
+    geezFirstName: "ጤና",
+    geezMiddleName: "ታምሩ",
+    geezLastName: "አባተ",
+    dateOfBirth: "1999-11-19",
+    phoneNumber: "+251911328671",
+    birthPlace: "Amhara",
+    gender: 0
+  },   
+{
+    firstName: "TINBIT",
+    middleName: "MERGIYA",
+    lastName: "GUDETA",
+    geezFirstName: "ትንቢት",
+    geezMiddleName: "መርጊያ",
+    geezLastName: "ጉደታ",
+    dateOfBirth: "1977-06-17",
+    phoneNumber: "+251911328671",
+    birthPlace: "Addis Ababa",
+    gender: 0
+  }, {
+    firstName: "TENA",
+    middleName: "TAMERU",
+    lastName: "ABATE",
+    geezFirstName: "ጤና",
+    geezMiddleName: "ታምሩ",
+    geezLastName: "አባተ",
+    dateOfBirth: "1999-11-19",
+    phoneNumber: "+251911328671",
+    birthPlace: "Amhara",
+    gender: 0
+  },   
+{
+    firstName: "TINBIT",
+    middleName: "MERGIYA",
+    lastName: "GUDETA",
+    geezFirstName: "ትንቢት",
+    geezMiddleName: "መርጊያ",
+    geezLastName: "ጉደታ",
+    dateOfBirth: "1977-06-17",
+    phoneNumber: "+251911328671",
+    birthPlace: "Addis Ababa",
+    gender: 0
+  }, {
+    firstName: "TENA",
+    middleName: "TAMERU",
+    lastName: "ABATE",
+    geezFirstName: "ጤና",
+    geezMiddleName: "ታምሩ",
+    geezLastName: "አባተ",
+    dateOfBirth: "1999-11-19",
+    phoneNumber: "+251911328671",
+    birthPlace: "Amhara",
+    gender: 0
+  },   
+{
+    firstName: "TINBIT",
+    middleName: "MERGIYA",
+    lastName: "GUDETA",
+    geezFirstName: "ትንቢት",
+    geezMiddleName: "መርጊያ",
+    geezLastName: "ጉደታ",
+    dateOfBirth: "1977-06-17",
+    phoneNumber: "+251911328671",
+    birthPlace: "Addis Ababa",
+    gender: 0
+  }, {
+    firstName: "TENA",
+    middleName: "TAMERU",
+    lastName: "ABATE",
+    geezFirstName: "ጤና",
+    geezMiddleName: "ታምሩ",
+    geezLastName: "አባተ",
+    dateOfBirth: "1999-11-19",
+    phoneNumber: "+251911328671",
+    birthPlace: "Amhara",
+    gender: 0
+  },   
+{
+    firstName: "TINBIT",
+    middleName: "MERGIYA",
+    lastName: "GUDETA",
+    geezFirstName: "ትንቢት",
+    geezMiddleName: "መርጊያ",
+    geezLastName: "ጉደታ",
+    dateOfBirth: "1977-06-17",
+    phoneNumber: "+251911328671",
+    birthPlace: "Addis Ababa",
+    gender: 0
+  }, {
+    firstName: "TENA",
+    middleName: "TAMERU",
+    lastName: "ABATE",
+    geezFirstName: "ጤና",
+    geezMiddleName: "ታምሩ",
+    geezLastName: "አባተ",
+    dateOfBirth: "1999-11-19",
+    phoneNumber: "+251911328671",
+    birthPlace: "Amhara",
+    gender: 0
+  },   
+{
+    firstName: "TINBIT",
+    middleName: "MERGIYA",
+    lastName: "GUDETA",
+    geezFirstName: "ትንቢት",
+    geezMiddleName: "መርጊያ",
+    geezLastName: "ጉደታ",
+    dateOfBirth: "1977-06-17",
+    phoneNumber: "+251911328671",
+    birthPlace: "Addis Ababa",
+    gender: 0
+  }, {
+    firstName: "TENA",
+    middleName: "TAMERU",
+    lastName: "ABATE",
+    geezFirstName: "ጤና",
+    geezMiddleName: "ታምሩ",
+    geezLastName: "አባተ",
+    dateOfBirth: "1999-11-19",
+    phoneNumber: "+251911328671",
+    birthPlace: "Amhara",
+    gender: 0
+  },   
+{
+    firstName: "TINBIT",
+    middleName: "MERGIYA",
+    lastName: "GUDETA",
+    geezFirstName: "ትንቢት",
+    geezMiddleName: "መርጊያ",
+    geezLastName: "ጉደታ",
+    dateOfBirth: "1977-06-17",
+    phoneNumber: "+251911328671",
+    birthPlace: "Addis Ababa",
+    gender: 0
+  }, {
+    firstName: "TENA",
+    middleName: "TAMERU",
+    lastName: "ABATE",
+    geezFirstName: "ጤና",
+    geezMiddleName: "ታምሩ",
+    geezLastName: "አባተ",
+    dateOfBirth: "1999-11-19",
+    phoneNumber: "+251911328671",
+    birthPlace: "Amhara",
+    gender: 0
+  },   
+{
+    firstName: "TINBIT",
+    middleName: "MERGIYA",
+    lastName: "GUDETA",
+    geezFirstName: "ትንቢት",
+    geezMiddleName: "መርጊያ",
+    geezLastName: "ጉደታ",
+    dateOfBirth: "1977-06-17",
+    phoneNumber: "+251911328671",
+    birthPlace: "Addis Ababa",
+    gender: 0
+  }, {
+    firstName: "TENA",
+    middleName: "TAMERU",
+    lastName: "ABATE",
+    geezFirstName: "ጤና",
+    geezMiddleName: "ታምሩ",
+    geezLastName: "አባተ",
+    dateOfBirth: "1999-11-19",
+    phoneNumber: "+251911328671",
+    birthPlace: "Amhara",
+    gender: 0
+  },   
+{
+    firstName: "TINBIT",
+    middleName: "MERGIYA",
+    lastName: "GUDETA",
+    geezFirstName: "ትንቢት",
+    geezMiddleName: "መርጊያ",
+    geezLastName: "ጉደታ",
+    dateOfBirth: "1977-06-17",
+    phoneNumber: "+251911328671",
+    birthPlace: "Addis Ababa",
+    gender: 0
+  }, {
+    firstName: "TENA",
+    middleName: "TAMERU",
+    lastName: "ABATE",
+    geezFirstName: "ጤና",
+    geezMiddleName: "ታምሩ",
+    geezLastName: "አባተ",
+    dateOfBirth: "1999-11-19",
+    phoneNumber: "+251911328671",
+    birthPlace: "Amhara",
+    gender: 0
+  },   
+{
+    firstName: "TINBIT",
+    middleName: "MERGIYA",
+    lastName: "GUDETA",
+    geezFirstName: "ትንቢት",
+    geezMiddleName: "መርጊያ",
+    geezLastName: "ጉደታ",
+    dateOfBirth: "1977-06-17",
+    phoneNumber: "+251911328671",
+    birthPlace: "Addis Ababa",
+    gender: 0
+  }, {
+    firstName: "TENA",
+    middleName: "TAMERU",
+    lastName: "ABATE",
+    geezFirstName: "ጤና",
+    geezMiddleName: "ታምሩ",
+    geezLastName: "አባተ",
+    dateOfBirth: "1999-11-19",
+    phoneNumber: "+251911328671",
+    birthPlace: "Amhara",
+    gender: 0
+  },   
+{
+    firstName: "TINBIT",
+    middleName: "MERGIYA",
+    lastName: "GUDETA",
+    geezFirstName: "ትንቢት",
+    geezMiddleName: "መርጊያ",
+    geezLastName: "ጉደታ",
+    dateOfBirth: "1977-06-17",
+    phoneNumber: "+251911328671",
+    birthPlace: "Addis Ababa",
+    gender: 0
+  },
 ];
 const RETRY_DELAY = 2000;
 const RETRY_429_DELAY = 10000;
@@ -612,9 +525,13 @@ async function sendRequestWithRetry(workerId, applicant) {
         const epNumber = paymentRes.data.orderId;
         const trackerNumber = paymentRes.data.traceNumber;
 
-        console.log(`💰 [PAYMENT - ${fullName}] Success`);
-        console.log(`💰 [EP Number - ${epNumber}] Success`);
-        console.log(`💰 [Tracker Number - ${trackerNumber}] Success`);
+  console.log('\n' + '='.repeat(50));
+  console.log(`🎯 SUCCESS: ${fullName}`);
+  console.log(`🆔 Reserved ID: ${reservedId}`);
+  console.log(`📦 Request ID: ${reqId}`);
+  console.log(`💰 EP Number: ${epNumber}`);
+  console.log(`📨 Tracker Number: ${trackerNumber}`);
+  console.log('='.repeat(50) + '\n');
 
 
         // console.log("📦 Payment Response:", JSON.stringify(paymentRes.data, null, 2));
