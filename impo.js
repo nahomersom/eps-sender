@@ -1,16 +1,6 @@
 const axios = require('axios');
 
-const WORKERS_PER_APPLICANT = 2;
-const MAX_ID_ATTEMPTS = 50;
-const MAX_TOTAL_RETRIES = 200;
-const RETRY_DELAY = 2000;
-const RETRY_429_DELAY = 15000;
-
-const fetchURL = 'https://ethiopianpassportapiu.ethiopianairlines.com/Schedule/api/V1.0/Schedule/SubmitAppointment';
-const submitURL = 'https://ethiopianpassportapiu.ethiopianairlines.com/Request/api/V1.0/Request/SubmitRequest';
-const paymentURL = 'https://ethiopianpassportapi.ethiopianairlines.com/Payment/api/V1.0/Payment/OrderRequest';
-
-// ... your applicantsList and mobileProfiles remain unchanged ...
+// Applicant Data
 const applicantsList = [
   {
     firstName: "MADINA",
@@ -385,6 +375,20 @@ const applicantsList = [
     gender: 0
   }
 ];
+// Configuration
+const CONFIG = {
+  BASE_DELAY: 2000,
+  MAX_DELAY: 30000,
+  MAX_ID_ATTEMPTS: 50,
+  MAX_TOTAL_RETRIES: 20,
+  REQUEST_TIMEOUT: 8000,
+  ID_RANGE: 20,
+  MAX_CONCURRENT: 2,
+  RATE_LIMIT_WAIT: 60000,
+  MAX_429_RETRIES: 3
+};
+
+// Mobile profiles for user agent rotation
 const mobileProfiles = [
   {
     name: 'iPhone 14 - Safari',
@@ -415,40 +419,77 @@ const mobileProfiles = [
     userAgent: 'Mozilla/5.0 (Linux; Android 13; ONEPLUS CPH2447) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/119.0.6045.134 Mobile Safari/537.36',
     platform: 'Android',
     secChUaPlatform: '"Android"'
-  },
-  {
-    name: 'Samsung A52 - Samsung Internet',
-    userAgent: 'Mozilla/5.0 (Linux; Android 13; SAMSUNG SM-A525F) AppleWebKit/537.36 (KHTML, like Gecko) SamsungBrowser/22.0 Chrome/110.0.5481.77 Mobile Safari/537.36',
-    platform: 'Android',
-    secChUaPlatform: '"Android"'
-  },
-  {
-    name: 'iPhone SE (3rd Gen) - Safari',
-    userAgent: 'Mozilla/5.0 (iPhone; CPU iPhone OS 15_6 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/15.6 Mobile/15E148 Safari/604.1',
-    platform: 'iPhone',
-    secChUaPlatform: '"iOS"'
-  },
-  {
-    name: 'Xiaomi Redmi Note 11 - Chrome',
-    userAgent: 'Mozilla/5.0 (Linux; Android 12; Redmi Note 11) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/118.0.5993.90 Mobile Safari/537.36',
-    platform: 'Android',
-    secChUaPlatform: '"Android"'
-  },
-  {
-    name: 'Motorola Edge 30 - Chrome',
-    userAgent: 'Mozilla/5.0 (Linux; Android 12; motorola edge 30) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.6099.199 Mobile Safari/537.36',
-    platform: 'Android',
-    secChUaPlatform: '"Android"'
-  },
-  {
-    name: 'Google Pixel 5 - Firefox',
-    userAgent: 'Mozilla/5.0 (Android 12; Mobile; rv:109.0) Gecko/109.0 Firefox/109.0',
-    platform: 'Android',
-    secChUaPlatform: '"Android"'
   }
 ];
+
 function getMobileProfile(index) {
   return mobileProfiles[index % mobileProfiles.length];
+}
+
+// API Endpoints
+const fetchURL = 'https://ethiopianpassportapiu.ethiopianairlines.com/Schedule/api/V1.0/Schedule/SubmitAppointment';
+const submitURL = 'https://ethiopianpassportapiu.ethiopianairlines.com/Request/api/V1.0/Request/SubmitRequest';
+const paymentURL = 'https://ethiopianpassportapi.ethiopianairlines.com/Payment/api/V1.0/Payment/OrderRequest';
+
+// Enhanced request function with manual retry logic
+async function makeRequest(url, data, headers, retryConfig = {}) {
+  let attempt = 0;
+  let last429Time = 0;
+  let consecutive429s = 0;
+  
+  while (attempt < (retryConfig.maxRetries || 3)) {
+    attempt++;
+    try {
+      // Add jitter to vary request timing
+      const jitter = Math.random() * 500;
+      await new Promise(resolve => setTimeout(resolve, jitter));
+      
+      // Check if we need to cooldown due to rate limiting
+      const now = Date.now();
+      if (consecutive429s >= CONFIG.MAX_429_RETRIES && 
+          now - last429Time < CONFIG.RATE_LIMIT_WAIT) {
+        const waitTime = CONFIG.RATE_LIMIT_WAIT - (now - last429Time);
+        console.log(`🚨 Rate limit cooldown - waiting ${waitTime/1000}s`);
+        await new Promise(resolve => setTimeout(resolve, waitTime));
+        consecutive429s = 0;
+      }
+      
+      const response = await axios({
+        method: 'post',
+        url,
+        data,
+        headers,
+        timeout: CONFIG.REQUEST_TIMEOUT,
+        validateStatus: (status) => status < 500 // Don't throw for 429
+      });
+      
+      if (response.status === 429) {
+        consecutive429s++;
+        last429Time = Date.now();
+        const retryAfter = response.headers['retry-after'] 
+          ? parseInt(response.headers['retry-after']) * 1000 
+          : CONFIG.BASE_DELAY * Math.pow(2, attempt);
+        
+        console.log(`⚠️ 429 Received - Waiting ${retryAfter/1000}s`);
+        await new Promise(resolve => setTimeout(resolve, retryAfter));
+        continue;
+      }
+      
+      // Reset 429 counter on successful request
+      consecutive429s = 0;
+      return response;
+      
+    } catch (error) {
+      if (attempt >= (retryConfig.maxRetries || 3)) throw error;
+      
+      const delay = error.response?.status === 429 
+        ? CONFIG.BASE_DELAY * Math.pow(2, attempt)
+        : CONFIG.BASE_DELAY;
+      
+      console.log(`⏳ Attempt ${attempt} failed - Retrying in ${delay/1000}s`);
+      await new Promise(resolve => setTimeout(resolve, delay));
+    }
+  }
 }
 
 const buildRequestBody = (appointmentId, applicant) => ({
@@ -521,138 +562,171 @@ const buildPaymentBody = (applicant, requestId) => ({
   requestId
 });
 
-async function runInBatches(tasks, batchSize = 10, delayBetweenBatches = 300) {
-  const results = [];
-  for (let i = 0; i < tasks.length; i += batchSize) {
-    const batch = tasks.slice(i, i + batchSize);
-    const batchResults = await Promise.allSettled(batch);
-    results.push(...batchResults);
-    if (i + batchSize < tasks.length) {
-      await new Promise(res => setTimeout(res, delayBetweenBatches));
-    }
-  }
-  return results;
-}
-
-async function sendRequestWithRetry(workerId, applicant) {
-  let attempt = 0;
-  const fullName = `${applicant.firstName} ${applicant.middleName} ${applicant.lastName}`;
-  const profile = getMobileProfile(workerId);
-
-  const buildHeaders = () => ({
+function buildHeaders(workerId) {
+  const profile = getMobileProfile(workerId - 1);
+  return {
     'Content-Type': 'application/json',
     'Origin': 'https://www.ethiopianpassportservices.gov.et',
     'User-Agent': profile.userAgent,
     'Accept': 'application/json, text/plain, */*',
     'Accept-Language': 'en-US,en;q=0.9',
     'Referer': 'https://www.ethiopianpassportservices.gov.et/',
-    'Sec-Ch-Ua': '"Not A(Brand";v="99", "Google Chrome";v="121", "Chromium";v="121"',
+    'Sec-Ch-Ua': `"Not A(Brand";v="99", "Google Chrome";v=${Math.floor(Math.random() * 20) + 110}, "Chromium";v=${Math.floor(Math.random() * 20) + 110}`,
     'Sec-Ch-Ua-Mobile': '?1',
-    'Sec-Ch-Ua-Platform': profile.secChUaPlatform
-  });
+    'Sec-Ch-Ua-Platform': profile.secChUaPlatform,
+    'X-Forwarded-For': `${Math.floor(Math.random() * 255)}.${Math.floor(Math.random() * 255)}.${Math.floor(Math.random() * 255)}.${Math.floor(Math.random() * 255)}`
+  };
+}
 
-  while (attempt < MAX_TOTAL_RETRIES) {
-    attempt++;
+async function tryReserveId(workerId, baseId, applicant, headers) {
+  const startId = baseId - Math.floor(CONFIG.ID_RANGE / 2);
+  const attempts = Array.from({ length: CONFIG.ID_RANGE }, (_, i) => startId + i);
+  
+  // Shuffle attempts to be less predictable
+  for (let i = attempts.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [attempts[i], attempts[j]] = [attempts[j], attempts[i]];
+  }
+
+  for (const id of attempts) {
     try {
-      console.log(`🟡 [Worker ${workerId}] ${fullName} - Attempt ${attempt}`);
+      const body = buildRequestBody(id, applicant);
+      const res = await makeRequest(
+        submitURL, 
+        body, 
+        headers,
+        { maxRetries: 2 } // Fewer retries for individual ID attempts
+      );
 
-      const fetchRes = await axios.post(fetchURL, {
+      if (res.status === 200 && res.data?.serviceResponseList?.[0]?.requestId) {
+        return {
+          success: true,
+          reservedId: id,
+          requestId: res.data.serviceResponseList[0].requestId,
+          response: res.data
+        };
+      }
+    } catch (error) {
+      console.log(`⚠️ Failed to reserve ID ${id}: ${error.message}`);
+    }
+  }
+  
+  return { success: false };
+}
+
+async function sendRequestWithRetry(workerId, applicant) {
+  const fullName = `${applicant.firstName} ${applicant.middleName} ${applicant.lastName}`;
+  let lastSuccessTime = 0;
+  let consecutiveFailures = 0;
+  
+  for (let attempt = 1; attempt <= CONFIG.MAX_TOTAL_RETRIES; attempt++) {
+    try {
+      const now = Date.now();
+      const timeSinceLastSuccess = now - lastSuccessTime;
+      
+      // Dynamic delay based on recent success/failure rate
+      let delay = Math.max(
+        CONFIG.BASE_DELAY,
+        Math.min(CONFIG.MAX_DELAY, consecutiveFailures * 1000)
+      );
+      
+      if (timeSinceLastSuccess < 30000 && attempt > 1) {
+        delay = Math.max(delay, 30000 - timeSinceLastSuccess);
+      }
+      
+      if (attempt > 1) {
+        console.log(`⏳ [Worker ${workerId}] Waiting ${delay/1000}s before next attempt...`);
+        await new Promise(resolve => setTimeout(resolve, delay));
+      }
+      
+      console.log(`🟡 [Worker ${workerId}] ${fullName} - Attempt ${attempt}`);
+      
+      // Get fresh headers each attempt
+      const headers = buildHeaders(workerId);
+      
+      // 1. Fetch appointment IDs
+      const fetchRes = await makeRequest(fetchURL, {
         id: 0,
         isUrgent: true,
         RequestTypeId: 2,
         OfficeId: 24,
         ProcessDays: 2
-      }, { headers: buildHeaders(), validateStatus: () => true });
-
-      if (fetchRes.status === 429) {
-        console.warn(`⛔ [Worker ${workerId}] 429 Rate limit. Waiting ${RETRY_429_DELAY / 1000}s`);
-        await new Promise(res => setTimeout(res, RETRY_429_DELAY + Math.random() * 2000));
-        continue;
-      }
-
-      if (fetchRes.status !== 200) {
-        await new Promise(res => setTimeout(res, RETRY_DELAY + Math.random() * 1000));
-        continue;
-      }
-
+      }, headers);
+      
       const baseId = fetchRes.data?.appointmentResponses?.[0]?.id;
       if (!baseId) {
-        await new Promise(res => setTimeout(res, RETRY_DELAY + Math.random() * 1000));
+        console.warn(`❌ [Worker ${workerId}] No appointment ID returned`);
+        consecutiveFailures++;
         continue;
       }
-
-      const offsets = Array.from({ length: MAX_ID_ATTEMPTS }, (_, i) => i);
-      for (let i = offsets.length - 1; i > 0; i--) {
-        const j = Math.floor(Math.random() * (i + 1));
-        [offsets[i], offsets[j]] = [offsets[j], offsets[i]];
-      }
-
-      const submitTasks = offsets.map(offset => {
-        const tryId = baseId + offset;
-        const body = buildRequestBody(tryId, applicant);
-        return axios.post(submitURL, body, { headers: buildHeaders(), validateStatus: () => true })
-          .then(res => ({ id: tryId, res }))
-          .catch(err => ({ id: tryId, error: err }));
-      });
-
-      const settled = await runInBatches(submitTasks, 10, 300);
-      const successful = settled.find(r => r.status === 'fulfilled' && r.value?.res?.status === 200 &&
-        r.value.res.data?.serviceResponseList?.[0]?.requestId);
-
-      if (!successful) {
-        await new Promise(res => setTimeout(res, RETRY_DELAY + Math.random() * 1000));
+      
+      console.log(`✅ [Worker ${workerId}] Got appointment ID base: ${baseId}`);
+      
+      // 2. Try to reserve an ID
+      const reservation = await tryReserveId(workerId, baseId, applicant, headers);
+      
+      if (!reservation.success) {
+        console.log(`🔁 [${fullName}] All ID attempts failed. Retrying...`);
+        consecutiveFailures++;
         continue;
       }
-
-      const { id: reservedId, res: submitRes } = successful.value;
-      const reqId = submitRes.data.serviceResponseList[0].requestId;
-      const paymentBody = buildPaymentBody(applicant, reqId);
-      const paymentRes = await axios.post(paymentURL, paymentBody, {
-        headers: buildHeaders(), validateStatus: () => true
-      });
-
+      
+      // 3. Process successful reservation
+      const { reservedId, requestId } = reservation;
+      console.log(`🎯 [SUCCESS - ${fullName}] Reserved ID: ${reservedId} Request ID: ${requestId}`);
+      
+      // 4. Process payment
+      const paymentBody = buildPaymentBody(applicant, requestId);
+      const paymentRes = await makeRequest(paymentURL, paymentBody, headers);
+      
       if (paymentRes.status === 200) {
         const epNumber = paymentRes.data.orderId;
         const trackerNumber = paymentRes.data.traceNumber;
-
+        
         console.log('\n' + '='.repeat(50));
         console.log(`🎯 SUCCESS: ${fullName}`);
         console.log(`🆔 Reserved ID: ${reservedId}`);
-        console.log(`📦 Request ID: ${reqId}`);
+        console.log(`📦 Request ID: ${requestId}`);
         console.log(`💰 EP Number: ${epNumber}`);
         console.log(`📨 Tracker Number: ${trackerNumber}`);
         console.log('='.repeat(50) + '\n');
+        
+        lastSuccessTime = Date.now();
+        consecutiveFailures = 0;
+        break;
       } else {
         console.log(`💥 [PAYMENT - ${fullName}] Failed. Status: ${paymentRes.status}`);
+        consecutiveFailures++;
       }
-
-      break;
-
+      
     } catch (err) {
-      console.error(`💥 [${fullName}] Error: ${err.message}`);
-      await new Promise(res => setTimeout(res, RETRY_DELAY + Math.random() * 1000));
+      console.error(`💥 [${fullName}] Unexpected error: ${err.message}`);
+      consecutiveFailures++;
     }
   }
-
-  if (attempt >= MAX_TOTAL_RETRIES) {
-    console.warn(`❌ [${fullName}] Max retries reached.`);
+  
+  if (consecutiveFailures >= CONFIG.MAX_TOTAL_RETRIES) {
+    console.warn(`❌ [${fullName}] Max retries reached. Giving up.`);
   }
 }
 
 async function runAll() {
-  const tasks = [];
-
-  applicantsList.forEach((applicant, i) => {
-    for (let w = 0; w < WORKERS_PER_APPLICANT; w++) {
-      const workerId = i * WORKERS_PER_APPLICANT + w + 1;
-      tasks.push(
-        new Promise(res => setTimeout(res, i * 500 + w * 500)) // staggered
-          .then(() => sendRequestWithRetry(workerId, applicant))
-      );
-    }
-  });
-
-  await Promise.all(tasks);
+  const queue = [...applicantsList];
+  const workers = [];
+  
+  // Process applicants sequentially to avoid overwhelming the server
+  for (let i = 0; i < CONFIG.MAX_CONCURRENT; i++) {
+    workers.push((async () => {
+      while (queue.length > 0) {
+        const applicant = queue.shift();
+        if (applicant) {
+          await sendRequestWithRetry(i + 1, applicant);
+        }
+      }
+    })());
+  }
+  
+  await Promise.all(workers);
   console.log('🎉 All workers finished.');
 }
 

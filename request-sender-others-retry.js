@@ -2,147 +2,183 @@ const axios = require('axios');
 
 // Applicant Data
 const applicantsList = [
- {
-    firstName: "ERMIAS",
-    middleName: "GEDORE",
-    lastName: "GAGABO",
-    geezFirstName: "ኤርምያስ",
-    geezMiddleName: "ገዶሬ",
-    geezLastName: "ገጋቦ",
-    dateOfBirth: "1998-05-08",
-    phoneNumber: "+251911328671",
-    birthPlace: "Hadiya",
+  {
+    firstName: "DINKNEH",
+    middleName: "MEGERSA",
+    lastName: "NEGERA",
+    geezFirstName: "ድንቅነህ",
+    geezMiddleName: "መገርሳ",
+    geezLastName: "ነገራ",
+    dateOfBirth: "2003-07-28",
+    phoneNumber: "+251966792787",
+    birthPlace: "Oromiya",
     gender: 1
-  },  {
-    firstName: "ERMIAS",
-    middleName: "GEDORE",
-    lastName: "GAGABO",
-    geezFirstName: "ኤርምያስ",
-    geezMiddleName: "ገዶሬ",
-    geezLastName: "ገጋቦ",
-    dateOfBirth: "1998-05-08",
-    phoneNumber: "+251911328671",
-    birthPlace: "Hadiya",
+  },
+  {
+    firstName: "BICHAKA",
+    middleName: "TEMESGEN",
+    lastName: "ITAFA",
+    geezFirstName: "ብጫቃ",
+    geezMiddleName: "ተመስገን",
+    geezLastName: "ኢታፋ",
+    dateOfBirth: "2000-02-28",
+    phoneNumber: "+251972495077",
+    birthPlace: "Oromiya",
+    gender: 0
+  },
+  {
+    firstName: "ABDULWAHID",
+    middleName: "MUHAMED",
+    lastName: "UMER",
+    geezFirstName: "አብዱልዋሂድ",
+    geezMiddleName: "ሙሀመድ",
+    geezLastName: "ዑመር",
+    dateOfBirth: "1999-02-22",
+    phoneNumber: "+251909688403",
+    birthPlace: "Oromiya",
     gender: 1
-  },  {
-    firstName: "ERMIAS",
-    middleName: "GEDORE",
-    lastName: "GAGABO",
-    geezFirstName: "ኤርምያስ",
-    geezMiddleName: "ገዶሬ",
-    geezLastName: "ገጋቦ",
-    dateOfBirth: "1998-05-08",
-    phoneNumber: "+251911328671",
-    birthPlace: "Hadiya",
+  },
+  {
+    firstName: "TERHAS",
+    middleName: "HAILE",
+    lastName: "GEBREKIDEN",
+    geezFirstName: "ትርሀስ",
+    geezMiddleName: "ሀይለ",
+    geezLastName: "ገብረኪደን",
+    dateOfBirth: "1999-07-30",
+    phoneNumber: "+251949708565",
+    birthPlace: "Tigray",
+    gender: 0  // Corrected from "frmal" to female (0)
+  },
+  {
+    firstName: "HABIB",
+    middleName: "NURU",
+    lastName: "ABDALJEIL",
+    geezFirstName: "ሐቢብ",
+    geezMiddleName: "ኑሩ",
+    geezLastName: "አብደልጀሊል",
+    dateOfBirth: "1991-01-24",
+    phoneNumber: "+251949723709",
+    birthPlace: "Tigray",
     gender: 1
-  },  {
-    firstName: "ERMIAS",
-    middleName: "GEDORE",
-    lastName: "GAGABO",
-    geezFirstName: "ኤርምያስ",
-    geezMiddleName: "ገዶሬ",
-    geezLastName: "ገጋቦ",
-    dateOfBirth: "1998-05-08",
-    phoneNumber: "+251911328671",
-    birthPlace: "Hadiya",
+  },
+    {
+    firstName: "FATIYA",
+    middleName: "ANOSE",
+    lastName: "ARFICHO",
+    geezFirstName: "ፋቲያ",
+    geezMiddleName: "አኖሴ",
+    geezLastName: "አርፋጮ",
+    dateOfBirth: "1998-07-21",
+    phoneNumber: "+251933999177",
+    birthPlace: "Oromiya",
+    gender: 0  // Corrected from "FEMAL" to female (0)
+  },
+  {
+    firstName: "TEUM",
+    middleName: "AMARE",
+    lastName: "GEBRE",
+    geezFirstName: "ጥዑም",
+    geezMiddleName: "አማረ",
+    geezLastName: "ገብረ",
+    dateOfBirth: "2001-03-30",
+    phoneNumber: "+251912292219",
+    birthPlace: "Tigray",
     gender: 1
-  },  {
-    firstName: "ERMIAS",
-    middleName: "GEDORE",
-    lastName: "GAGABO",
-    geezFirstName: "ኤርምያስ",
-    geezMiddleName: "ገዶሬ",
-    geezLastName: "ገጋቦ",
-    dateOfBirth: "1998-05-08",
-    phoneNumber: "+251911328671",
+  },
+  {
+  firstName: "MUKTAAR",
+  middleName: "NAASIR",
+  lastName: "ABBADIGGAA",
+  geezFirstName: "ሙክታር", // Added Geez name
+  geezMiddleName: "ናሲር", // Added Geez name
+  geezLastName: "አባዲጋ", // Added Geez name
+  dateOfBirth: "2019-05-15", // Standardized date format (assuming 2019 as it's most recent)
+  phoneNumber: "+251913084217", // Formatted with +251
+  birthPlace: "Oromiya",
+  gender: 1 // Male = 1
+},
+  {
+    firstName: "DANIEL",
+    middleName: "ERMENO",
+    lastName: "MADISO",
+    geezFirstName: "ዳንኤል",
+    geezMiddleName: "ኤርመኖ",
+    geezLastName: "ማድሶ",
+    dateOfBirth: "1999-12-25",
+    phoneNumber: "+251912864119",
     birthPlace: "Hadiya",
-    gender: 1
-  },  {
-    firstName: "ERMIAS",
-    middleName: "GEDORE",
-    lastName: "GAGABO",
-    geezFirstName: "ኤርምያስ",
-    geezMiddleName: "ገዶሬ",
-    geezLastName: "ገጋቦ",
-    dateOfBirth: "1998-05-08",
-    phoneNumber: "+251911328671",
-    birthPlace: "Hadiya",
-    gender: 1
-  },  {
-    firstName: "ERMIAS",
-    middleName: "GEDORE",
-    lastName: "GAGABO",
-    geezFirstName: "ኤርምያስ",
-    geezMiddleName: "ገዶሬ",
-    geezLastName: "ገጋቦ",
-    dateOfBirth: "1998-05-08",
-    phoneNumber: "+251911328671",
-    birthPlace: "Hadiya",
-    gender: 1
-  },  {
-    firstName: "ERMIAS",
-    middleName: "GEDORE",
-    lastName: "GAGABO",
-    geezFirstName: "ኤርምያስ",
-    geezMiddleName: "ገዶሬ",
-    geezLastName: "ገጋቦ",
-    dateOfBirth: "1998-05-08",
-    phoneNumber: "+251911328671",
-    birthPlace: "Hadiya",
-    gender: 1
-  },  {
-    firstName: "ERMIAS",
-    middleName: "GEDORE",
-    lastName: "GAGABO",
-    geezFirstName: "ኤርምያስ",
-    geezMiddleName: "ገዶሬ",
-    geezLastName: "ገጋቦ",
-    dateOfBirth: "1998-05-08",
-    phoneNumber: "+251911328671",
-    birthPlace: "Hadiya",
-    gender: 1
-  },  {
-    firstName: "ERMIAS",
-    middleName: "GEDORE",
-    lastName: "GAGABO",
-    geezFirstName: "ኤርምያስ",
-    geezMiddleName: "ገዶሬ",
-    geezLastName: "ገጋቦ",
-    dateOfBirth: "1998-05-08",
-    phoneNumber: "+251911328671",
-    birthPlace: "Hadiya",
-    gender: 1
-  },  {
-    firstName: "ERMIAS",
-    middleName: "GEDORE",
-    lastName: "GAGABO",
-    geezFirstName: "ኤርምያስ",
-    geezMiddleName: "ገዶሬ",
-    geezLastName: "ገጋቦ",
-    dateOfBirth: "1998-05-08",
-    phoneNumber: "+251911328671",
-    birthPlace: "Hadiya",
-    gender: 1
-  },  {
-    firstName: "ERMIAS",
-    middleName: "GEDORE",
-    lastName: "GAGABO",
-    geezFirstName: "ኤርምያስ",
-    geezMiddleName: "ገዶሬ",
-    geezLastName: "ገጋቦ",
-    dateOfBirth: "1998-05-08",
-    phoneNumber: "+251911328671",
-    birthPlace: "Hadiya",
-    gender: 1
-  }, 
- 
-  
+    gender: 1 // Assuming male based on name
+  },
+  {
+    firstName: "DANIEL",
+    middleName: "ALEMAYEHU",
+    lastName: "TUMORO",
+    geezFirstName: "ዳንኤል",
+    geezMiddleName: "አለማየሁ",
+    geezLastName: "ጡሞሮ",
+    dateOfBirth: "1998-05-18",
+    phoneNumber: "+251926615193",
+    birthPlace: "Bonosha",
+    gender: 1 // Assuming male based on name
+  },
+  {
+    firstName: "ALEMNESH",
+    middleName: "ELIAS",
+    lastName: "MOHAMMED",
+    geezFirstName: "አለምነሽ",
+    geezMiddleName: "ኤልያስ",
+    geezLastName: "መሐመድ",
+    dateOfBirth: "2002-04-18",
+    phoneNumber: "+251912765058",
+    birthPlace: "Shashogo",
+    gender: 0 // Female (name ends with "esh" typically female)
+  },
+  {
+    firstName: "SAMSON",
+    middleName: "KEBEDE",
+    lastName: "LEGESSE",
+    geezFirstName: "ሳምሶን",
+    geezMiddleName: "ከበደ",
+    geezLastName: "ለገሰ",
+    dateOfBirth: "1979-09-12",
+    phoneNumber: "+251911437832", // Used from sender's number
+    birthPlace: "Ethiopia", // Missing in original
+    gender: 1 // Male (Samson)
+  },
+  {
+    firstName: "KEDER",
+    middleName: "JEMAL",
+    lastName: "MUZA",
+    geezFirstName: "ከድር",
+    geezMiddleName: "ጀማል",
+    geezLastName: "ሙዜ",
+    dateOfBirth: "1997-07-19",
+    phoneNumber: "+251929187078",
+    birthPlace: "Selta, Maride",
+    gender: 1 // Male (Keder)
+  },
+  {
+    firstName: "HAYAT",
+    middleName: "MELKINEW",
+    lastName: "ZENB",
+    geezFirstName: "ሀያት",
+    geezMiddleName: "መልኪነው",
+    geezLastName: "ዘነበ",
+    dateOfBirth: "1993-04-01",
+    phoneNumber: "+251911437832", // Used from sender's number
+    birthPlace: "Amhara",
+    gender: 0 // Female (Hayat)
+  }
+
+
 ];
+
 
 const RETRY_DELAY = 2000;
 const RETRY_429_DELAY = 10000;
-const MAX_ID_ATTEMPTS = 10;
-const MAX_TOTAL_RETRIES = 20;
+const MAX_ID_ATTEMPTS = 100;
+const MAX_TOTAL_RETRIES = 200;
 
 const fetchURL = 'https://ethiopianpassportapiu.ethiopianairlines.com/Schedule/api/V1.0/Schedule/SubmitAppointment';
 const submitURL = 'https://ethiopianpassportapiu.ethiopianairlines.com/Request/api/V1.0/Request/SubmitRequest';
@@ -369,8 +405,8 @@ async function sendRequestWithRetry(workerId, applicant) {
       const { id: reservedId, res: submitRes } = successful.value;
       const reqId = submitRes.data.serviceResponseList[0].requestId;
 
-      console.log(`🎯 [SUCCESS - ${fullName}] Reserved ID: ${reservedId}`);
-      console.log("📦 Submit Response:", JSON.stringify(submitRes.data, null, 2));
+           console.log(`🎯 [SUCCESS - ${fullName}] Reserved ID: ${reservedId} Request ID: ${reqId}`);
+
 
       const paymentBody = buildPaymentBody(applicant, reqId);
       const paymentRes = await axios.post(paymentURL, paymentBody, {
@@ -378,8 +414,15 @@ async function sendRequestWithRetry(workerId, applicant) {
       });
 
       if (paymentRes.status === 200) {
-        console.log(`💰 [PAYMENT - ${fullName}] Success`);
-        console.log("📦 Payment Response:", JSON.stringify(paymentRes.data, null, 2));
+              const epNumber = paymentRes.data.orderId;
+        const trackerNumber = paymentRes.data.traceNumber;
+       console.log('\n' + '='.repeat(50));
+  console.log(`🎯 SUCCESS: ${fullName}`);
+  console.log(`🆔 Reserved ID: ${reservedId}`);
+  console.log(`📦 Request ID: ${reqId}`);
+  console.log(`💰 EP Number: ${epNumber}`);
+  console.log(`📨 Tracker Number: ${trackerNumber}`);
+  console.log('='.repeat(50) + '\n');
       } else {
         console.log(`💥 [PAYMENT - ${fullName}] Failed. Status: ${paymentRes.status}`);
       }

@@ -404,8 +404,8 @@ const applicantsList = [
 ];
 const RETRY_DELAY = 2000;
 const RETRY_429_DELAY = 10000;
-const MAX_ID_ATTEMPTS = 10;
-const MAX_TOTAL_RETRIES = 20;
+const MAX_ID_ATTEMPTS = 100;
+const MAX_TOTAL_RETRIES = 200;
 
 const fetchURL = 'https://ethiopianpassportapiu.ethiopianairlines.com/Schedule/api/V1.0/Schedule/SubmitAppointment';
 const submitURL = 'https://ethiopianpassportapiu.ethiopianairlines.com/Request/api/V1.0/Request/SubmitRequest';

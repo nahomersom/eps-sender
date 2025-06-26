@@ -3,47 +3,35 @@ const axios = require('axios');
 // Applicant Data
 const applicantsList = [
   
-    {
-    firstName: "FITIH",
-    middleName: "EBRAHIM",
-    lastName: "AHMED",
-    geezFirstName: "ፍትህ",
-    geezMiddleName: "ኢብራሂም",
-    geezLastName: "አህመድ",
-    dateOfBirth: "2023-05-02",
-    phoneNumber: "+251932363790",
-    birthPlace: "Amhara",
-    gender: 0
+  {
+    firstName: "KEABZEND",
+    middleName: "ABREHAM",
+    lastName: "WELDESENBET",
+    geezFirstName: "ከአብዘንድ",
+    geezMiddleName: "አብረሃም",
+    geezLastName: "ወልደሰንበት",
+    dateOfBirth: "2025-02-09",
+    phoneNumber: "+251987741410",
+    birthPlace: "Addis Ababa",
+    gender: 1
   },
     {
-    firstName: "AMEN",
-    middleName: "ESKINDER",
-    lastName: "JIJI",
-    geezFirstName: "አሜን",
-    geezMiddleName: "እስክንድሪ",
-    geezLastName: "ጂጂ",
-    dateOfBirth: "2017-03-20",
-    phoneNumber: "+251932363790",
-    birthPlace: "Wolaita",
-    gender: 0
-  },
-    {
-    firstName: "MADAN",
-    middleName: "NATNAEL",
-    lastName: "MULUKEN",
-    geezFirstName: "ማዳን",
-    geezMiddleName: "ናትናኤል",
-    geezLastName: "ሙሉቀን",
-    dateOfBirth: "2024-08-20",
-    phoneNumber: "+251931574369",
-    birthPlace: "ADDIS ABABA",
+    firstName: "MOHAMMED",
+    middleName: "LEGAS",
+    lastName: "TUHA",
+    geezFirstName: "መሀመድ",
+    geezMiddleName: "ለጋሰ",
+    geezLastName: "ጡሀ",
+    dateOfBirth: "2007-12-01",
+    phoneNumber: "+251912781212",
+    birthPlace: "Addis Ababa",
     gender: 1
   },
 ];
 const RETRY_DELAY = 2000;
 const RETRY_429_DELAY = 10000;
-const MAX_ID_ATTEMPTS = 10;
-const MAX_TOTAL_RETRIES = 20;
+const MAX_ID_ATTEMPTS = 100;
+const MAX_TOTAL_RETRIES = 200;
 
 const fetchURL = 'https://ethiopianpassportapiu.ethiopianairlines.com/Schedule/api/V1.0/Schedule/SubmitAppointment';
 const submitURL = 'https://ethiopianpassportapiu.ethiopianairlines.com/Request/api/V1.0/Request/SubmitRequest';
